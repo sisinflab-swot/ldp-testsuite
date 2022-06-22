@@ -1,6 +1,6 @@
 package org.w3.ldp.testsuite.test;
 
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -69,6 +69,7 @@ public class BasicContainerTest extends CommonContainerTest {
 					+ "covers the rest.")
 	public void testContainerSupportsHttpLinkHeader() {
 		Response response = buildBaseRequestSpecification().get(basicContainer);
+		
 		assertTrue(
 				containsLinkHeader(
 						basicContainer,

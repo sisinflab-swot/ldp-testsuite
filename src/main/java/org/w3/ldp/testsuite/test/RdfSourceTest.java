@@ -9,7 +9,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.marmotta.commons.vocabulary.LDP;
 import org.jboss.resteasy.spi.Failure;
@@ -119,7 +119,7 @@ public abstract class RdfSourceTest extends CommonResourceTest {
 				.get(resourceUri).as(Model.class, new RdfObjectMapper(resourceUri));
 
 		// Verify the change.
-		String relationAbsoluteUri = resolveIfRelative(resourceUri, relativeUri);
+		String relationAbsoluteUri = resolveIfRelative(resourceUri, relativeUri).replace("coap:/", "coap://");
 		assertTrue(
 				model.contains(
 						getPrimaryTopic(model, resourceUri),

@@ -7,35 +7,36 @@
         <listener class-name='org.w3.ldp.testsuite.reporter.LdpEarlReporter'/>
     </listeners>
 
-    <parameter name="basicContainer" value="http://localhost:8080/ldp/resources/bc/"/>
-    <!-- <parameter name="directContainer" value="http://localhost:8080/ldp/resources/dc-simple/" /> -->
-    <!-- <parameter name="indirectContainer" value="http://localhost:8080/ldp/resources/" /> -->
+    <parameter name="basicContainer" value="http://localhost:8080/proxy/coap://192.168.0.216:5688/bc"/>
+    <parameter name="directContainer" value="http://localhost:8080/proxy/coap://192.168.0.216:5688/dc-simple" /> 
+    <parameter name="indirectContainer" value="http://localhost:8080/proxy/coap://192.168.0.216:5688/ic" />
     
     <!-- A resource whose internal RDF state has a type triple of one of container types
          but whose interaction model was created with header on POST request of:
            Link: <http://www.w3c.org/ldp/ns#Resource>;rel="type"
          See: http://www.w3.org/TR/ldp/#ldpc-post-createrdf
       -->
-    <parameter name="containerAsResource" value="http://localhost:8080/ldp/resources/bc-asres/" />
+    <parameter name="containerAsResource" value="http://localhost:8080/proxy/coap://192.168.0.216:5688/bc-asres" />
     
     <!-- Properties for Earl Report, recommended that these be set  -->
-    <parameter name="assertor" value="mailto:joe@example.org" />
-    <parameter name="software" value="Reference Implementation" />
-    <parameter name="shortname" value="LDP Ref Impl" />
+    <parameter name="assertor" value="mailto:swot.sisinflab@poliba.it" />
+    <parameter name="software" value="LDP-CoAP 1.3.0" />
+    <parameter name="shortname" value="LDP-CoAP" />
     <parameter name="language" value = "Java" />
-    <parameter name="homepage" value ="http://example.org/LDP_impl" />
-    <parameter name="mbox" value="jdoe@example.org" />
-    <parameter name="developer" value="Jane Doe" />
-    <parameter name="description" value="Testing against: BasicContainer, RDFSource, NonRDFSource, Prefer, Container as Resource interaction model." />
-    <parameter name="auth" value="userid:password" />
+    <parameter name="homepage" value ="http://swot.sisinflab.poliba.it/ldp-coap/" />
+    <parameter name="mbox" value="swot.sisinflab@poliba.it" />
+	<parameter name="mail" value="swot.sisinflab@poliba.it" />
+    <parameter name="developer" value="SisInfLab - SWoT" />
+    <parameter name="description" value="Linked Data Platform for the Constrained Application Protocol" />
+    <parameter name="auth" value="sisinflab:test" />
     
 
     <!-- (Optional) RDF member resource parameter. If left out, the tests will
         try to create a resource in one of the containers. -->
-    <parameter name="memberResource" value="http://localhost:8080/ldp/resources/diffmr1"/>
+    <!-- <parameter name="memberResource" value="tbd"/> -->
 
     <!-- (Optional) Read only property to test server errors -->
-    <!-- <parameter name="readOnlyProp" value="http://purl.org/dc/terms/identifier" /> -->
+    <parameter name="readOnlyProp" value="http://purl.org/dc/terms/contributor" />
 
     <test name="All Tests">
         <groups>
@@ -56,10 +57,10 @@
                 <include name="ldpMember"/>
             </run>
         </groups>
-        <classes>
-            <!--  <class name="org.w3.ldp.testsuite.test.DirectContainerTest" />  -->
-            <!-- <class name="org.w3.ldp.testsuite.test.IndirectContainerTest" />  -->
+        <classes>            
             <class name="org.w3.ldp.testsuite.test.BasicContainerTest"/>
+			<class name="org.w3.ldp.testsuite.test.DirectContainerTest" /> 
+            <class name="org.w3.ldp.testsuite.test.IndirectContainerTest" />
             <class name="org.w3.ldp.testsuite.test.MemberResourceTest"/>
             <class name="org.w3.ldp.testsuite.test.NonRDFSourceTest" />
         </classes>

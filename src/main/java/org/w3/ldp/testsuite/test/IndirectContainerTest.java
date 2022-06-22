@@ -7,7 +7,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.rdf.model.Statement;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 
 import org.apache.http.HttpStatus;
 import org.testng.annotations.BeforeClass;

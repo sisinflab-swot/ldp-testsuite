@@ -31,7 +31,7 @@ import org.w3.ldp.testsuite.test.LdpTest;
 import org.w3.ldp.testsuite.transformer.MethodEnabler;
 import org.w3.ldp.testsuite.util.OptionsHandler;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 
 /**
  * LDP Test Suite Command-Line Interface, a wrapper to {@link org.testng.TestNG}

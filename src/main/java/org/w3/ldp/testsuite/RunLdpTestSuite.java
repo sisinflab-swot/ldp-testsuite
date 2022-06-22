@@ -11,6 +11,7 @@ public class RunLdpTestSuite {
 	private static Options options = new Options();
 	
 	public static void main(String[] args) {
+		
 		Logger.getRootLogger().setLevel(Level.OFF);
 
 		options.addOptionGroup(LdpTestSuite.addCommonOptions());
@@ -24,6 +25,7 @@ public class RunLdpTestSuite {
 		addRelativeUriOption();
 
 		LdpTestSuite.executeTestSuite(args, options, "ldp-testsuite");
+
 	}
 	
 	@SuppressWarnings("static-access")

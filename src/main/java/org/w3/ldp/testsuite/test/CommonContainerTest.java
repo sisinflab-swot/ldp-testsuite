@@ -1,13 +1,14 @@
 package org.w3.ldp.testsuite.test;
 
+import org.apache.jena.graph.Triple;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.util.ResourceUtils;
 import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Optional;
@@ -119,7 +120,9 @@ public abstract class CommonContainerTest extends RdfSourceTest {
 			// Check that the dcterms:relation URI was resolved relative to the
 			// URI assigned to the new resource (location).
 			Model responseModel = getResponse.as(Model.class, new RdfObjectMapper(location));
-			String relationAbsoluteUri = resolveIfRelative(location, relativeUri);
+			String relationAbsoluteUri = resolveIfRelative(location, relativeUri);	
+			relationAbsoluteUri = relationAbsoluteUri.replace("coap:/", "coap://");
+			
 			assertTrue(
 					responseModel.contains(
 							getPrimaryTopic(responseModel, location),
@@ -280,6 +283,12 @@ public abstract class CommonContainerTest extends RdfSourceTest {
 					.get(containerUri);
 			Model containerModel = getResponse.as(Model.class, new RdfObjectMapper(containerUri));
 			Resource container = containerModel.getResource(containerUri);
+			
+			for (Triple t : containerModel.getGraph().find().toList())
+				System.out.println(t.toString());
+			
+			for (String key : containerModel.getNsPrefixMap().keySet())
+				System.out.println(key + " --> " + containerModel.getNsPrefixMap().get(key));
 
 			assertTrue(
 					container.hasProperty(containerModel
@@ -396,6 +405,8 @@ public abstract class CommonContainerTest extends RdfSourceTest {
 				.body(model, new RdfObjectMapper()).expect()
 				.statusCode(HttpStatus.SC_CREATED).when()
 				.post(getResourceUri());
+		
+		System.out.println(postResponse.asString());
 
 		// Delete the resource to clean up.
 		String location = postResponse.getHeader(LOCATION);

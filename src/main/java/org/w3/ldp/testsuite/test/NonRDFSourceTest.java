@@ -1,7 +1,7 @@
 package org.w3.ldp.testsuite.test;
 
 import org.apache.jena.rdf.model.Model;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
@@ -152,6 +152,7 @@ public class NonRDFSourceTest extends CommonResourceTest {
 				.expect()
 					.statusCode(HttpStatus.SC_OK)
 					.contentType(HeaderMatchers.isTurtleCompatibleContentType())
+				.request()
 				.get(container)
 					.body().as(Model.class, new RdfObjectMapper(container));
 

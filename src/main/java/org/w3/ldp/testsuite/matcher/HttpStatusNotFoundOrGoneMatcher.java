@@ -2,9 +2,9 @@ package org.w3.ldp.testsuite.matcher;
 
 import org.apache.http.HttpStatus;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.testng.annotations.Factory;
 
 public class HttpStatusNotFoundOrGoneMatcher extends TypeSafeMatcher<Integer> {
 

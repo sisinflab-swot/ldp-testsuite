@@ -1,10 +1,10 @@
 package org.w3.ldp.paging.testsuite.tests;
 
-import static com.jayway.restassured.config.LogConfig.logConfig;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Map;
+
+import static io.restassured.config.LogConfig.logConfig;
 
 import org.apache.commons.io.output.WriterOutputStream;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +17,8 @@ import org.w3.ldp.testsuite.annotations.SpecTest.STATUS;
 import org.w3.ldp.testsuite.test.LdpTest;
 
 import com.google.common.collect.ImmutableMap;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 
 public class PagingTest extends LdpTest{
 	

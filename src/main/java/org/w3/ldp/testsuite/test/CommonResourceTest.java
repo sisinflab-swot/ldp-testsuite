@@ -1,12 +1,14 @@
 package org.w3.ldp.testsuite.test;
 
 import com.google.common.collect.ImmutableMap;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Header;
-import com.jayway.restassured.response.Headers;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
-import com.jayway.restassured.specification.ResponseSpecification;
+import io.restassured.RestAssured;
+import io.restassured.config.ConnectionConfig;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.apache.commons.io.output.WriterOutputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
@@ -30,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.jayway.restassured.config.LogConfig.logConfig;
+import static io.restassured.config.LogConfig.logConfig;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
@@ -107,12 +109,13 @@ public abstract class CommonResourceTest extends LdpTest {
 		if (httpLog != null) {
 			spec.config(RestAssured
 					.config()
+					.connectionConfig(ConnectionConfig.connectionConfig().dontCloseIdleConnectionsAfterEachResponse())
 					.logConfig(logConfig()
 							.enableLoggingOfRequestAndResponseIfValidationFails()
 							.defaultStream(new PrintStream(new WriterOutputStream(httpLog)))
 							.enablePrettyPrinting(true)));
 		}
-
+		
 		return spec;
 	}
 
