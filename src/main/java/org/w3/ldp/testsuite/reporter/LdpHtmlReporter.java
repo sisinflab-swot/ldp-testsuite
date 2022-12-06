@@ -82,7 +82,7 @@ public class LdpHtmlReporter implements IReporter {
 	
 	private static StringWriter graphs = new StringWriter();
 	
-	private static ArrayList<String> colors = new ArrayList<String>(Arrays.asList("#42d992", "#1cbfbb", "#1d0b4e", "#bf1c56"));
+	private static ArrayList<String> colors = new ArrayList<String>(Arrays.asList("#42d992", "#1cbfbb", "#1d0b4e", "#bf1c56", "#ff9800"));
 
 	private String outputDirectory = LdpTestSuite.OUTPUT_DIR;
 
@@ -696,7 +696,7 @@ public class LdpHtmlReporter implements IReporter {
 		graphs.write("hover_color: \"#ccccff\",");
 		writeChartColors(passClasses);
 		writeChartLabels(passClasses, failClasses, skipClasses);
-		graphs.write("}); });");
+		graphs.write("}) });");
 		graphs.write("</script>");
 	}
 	

@@ -109,7 +109,7 @@ public abstract class CommonResourceTest extends LdpTest {
 		if (httpLog != null) {
 			spec.config(RestAssured
 					.config()
-					.connectionConfig(ConnectionConfig.connectionConfig().dontCloseIdleConnectionsAfterEachResponse())
+					.connectionConfig(ConnectionConfig.connectionConfig().closeIdleConnectionsAfterEachResponse())
 					.logConfig(logConfig()
 							.enableLoggingOfRequestAndResponseIfValidationFails()
 							.defaultStream(new PrintStream(new WriterOutputStream(httpLog)))

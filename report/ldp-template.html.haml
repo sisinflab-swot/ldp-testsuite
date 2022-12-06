@@ -48,6 +48,8 @@
     %meta{"http-equiv" => "Content-Type", :content => "text/html;charset=utf-8"}
     %link{:rel => "alternate", :href => "ldp.ttl"}
     %link{:rel => "alternate", :href => "ldp.jsonld"}
+    - if tests['assertions'].nil?
+      = tests['assertions'] = []
     - tests['assertions'].each do |file|
       %link{:rel => "related", :href => file}
     %title
@@ -147,6 +149,8 @@
       - subject_refs = {}
       %h2
         Test Manifests
+      - if tests['entries'].nil?
+        = tests['entries'] = []
       - tests['entries'].each do |manifest|
         - test_cases = manifest['entries']
         %section{:typeof => manifest['@type'].join(" "), :resource => manifest['@id']}
@@ -202,6 +206,8 @@
       %p
         This report was tested using the following test subjects:
       %dl
+        - if subjects.nil?
+          = subjects = {}       
         - subjects.each_with_index do |subject, index|
           %dt{:id => subject_refs[subject['@id']]}
             %a{:href => subject['@id']}
